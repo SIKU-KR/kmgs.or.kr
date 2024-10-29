@@ -86,7 +86,7 @@
             <div class="carousel-inner">
                 <div th:each="carousel, stat : ${carouselimgs}"
                      th:class="${stat.index == 0} ? 'carousel-item active' : 'carousel-item'">
-                    <img class="d-block w-100" th:src="${carousel.url}" alt="slide image"/>
+                    <img class="d-block w-100" th:src="${carousel}" alt="slide image"/>
                 </div>
             </div>
 
