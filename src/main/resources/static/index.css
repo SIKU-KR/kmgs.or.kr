@@ -1,0 +1,29 @@
+* {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+/* 캐러셀의 높이를 고정 */
+#carouselExampleIndicators {
+    max-height: 60vh; /* 최대 높이를 고정 */
+}
+
+/* 캐러셀 내부 이미지에 대한 설정 */
+#carouselExampleIndicators .carousel-inner img {
+    max-height: 60vh; /* 이미지의 최대 높이를 캐러셀과 일치 */
+    width: 100%; /* 너비를 100%로 설정 */
+    object-fit: contain; /* 비율을 유지하면서 이미지가 완전히 보이도록 */
+}
+
+/* 테이블 레이아웃 고정 및 열 너비 설정 */
+.fixed-width-table {
+    margin-top: 1rem;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.fixed-width-table th,
+.fixed-width-table td {
+    width: 33%;
+    text-align: center;
+}

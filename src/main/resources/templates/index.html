@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"/>
+    <link rel="stylesheet" href="index.css"/>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="index.js"></script>
+    <title>한국마이크로중력협회</title>
+</head>
+<body>
+<header class="py-3 mb-3 mt-3">
+    <div class="container d-flex flex-wrap justify-content-center align-items-center">
+        <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 text-dark text-decoration-none">
+            <img src="https://storage.cloud.google.com/kmgs-storage/logo.webp"/> &nbsp;
+            <div>
+            <span class="fs-3" style="line-height: 1.1; text-align: center"><strong>한국마이크로중력학회</strong></span
+            ><br/>
+                <span class="fs-4" style="line-height: 1.1; text-align: center">The Korean Microgravity Society</span>
+            </div>
+        </a>
+    </div>
+</header>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Tenth navbar example">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample08"
+                aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+            <ul class="navbar-nav">
+                <li class="nav-item me-4">
+                    <a class="nav-link active tab-link" id="home-tab">Home</a>
+                </li>
+
+                <li class="nav-item me-4">
+                    <a class="nav-link tab-link" id="about-tab">학회소개</a>
+                </li>
+
+                <li class="nav-item me-4">
+                    <a class="nav-link tab-link" id="event-tab">행사안내</a>
+                </li>
+
+                <li class="nav-item me-4">
+                    <a class="nav-link tab-link" id="photo-tab">학회사진</a>
+                </li>
+
+                <li class="nav-item me-4">
+                    <a class="nav-link tab-link" id="news-tab">학회소식</a>
+                </li>
+
+                <li class="nav-item me-4">
+                    <a class="nav-link tab-link" id="history-tab">학회연혁 및 정관</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-5">
+
+    <!-- Home Contents -->
+    <div id="home-content" class="tab-content">
+        <div id="carouselExampleIndicators" class="carousel slide container my-5" data-bs-ride="carousel"
+             data-bs-interval="3500">
+
+            <!-- Thymeleaf: Carousel Indicators -->
+            <ol class="carousel-indicators">
+                <li th:each="carousel, stat : ${carouselimgs}"
+                    th:data-bs-slide-to="${stat.index}"
+                    th:classappend="${stat.index == 0} ? 'active' : ''"
+                    data-bs-target="#carouselExampleIndicators"></li>
+            </ol>
+
+            <!-- Thymeleaf: Carousel Inner -->
+            <div class="carousel-inner">
+                <div th:each="carousel, stat : ${carouselimgs}"
+                     th:class="${stat.index == 0} ? 'carousel-item active' : 'carousel-item'">
+                    <img class="d-block w-100" th:src="${carousel.url}" alt="slide image"/>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container my-5">
+            <h2 class="text-center">공지사항</h2>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10">
+
+                    <!-- Thymeleaf: Main Notices -->
+                    <div th:each="notice : ${mainnotice}" class="card my-3">
+                        <h5 th:text="${notice.title}" class="card-header"/>
+                        <div class="card-body">
+                            <p th:utext="${notice.content}" class="card-text"/>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  About Content  -->
+    <div id="about-content" class="tab-content">
+        <div class="container py-5 border-bottom">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 text-center">
+                    <img th:src="${president.imgUrl}" alt="회장 사진" class="img-fluid president-photo"/>
+                </div>
+                <div class="col-lg-9 col-md-8">
+                    <h2 th:text="${president.title}"/>
+                    <p th:utext="${president.content}" class="content"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container py-5">
+            <h2 class="text-center">임원 명단</h2>
+            <table class="table table-bordered text-center fixed-width-table">
+                <thead class="table-primary">
+                <tr>
+                    <th>직책</th>
+                    <th>이름</th>
+                    <th>소속</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="member : ${members}">
+                    <td th:text="${member.position}">직책</td>
+                    <td th:text="${member.name}">이름</td>
+                    <td th:text="${member.organization}">소속</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="event-content" class="tab-content">
+        <h1 class="display-5 text-center my-3">행사안내</h1>
+        <!-- Event content here -->
+    </div>
+
+    <div id="photo-content" class="tab-content">
+        <h1 class="display-5 text-center my-3">학회사진</h1>
+        <!-- Photo content here -->
+    </div>
+
+    <div id="news-content" class="tab-content">
+        <h1 class="display-5 text-center my-3">학회소식</h1>
+        <!-- News content here -->
+    </div>
+
+    <div id="history-content" class="tab-content">
+        <h1 class="display-5 text-center my-3">학회연혁 및 정관</h1>
+        <!-- About content here -->
+    </div>
+</div>
+
+<div class="container">
+    <footer class="d-flex flex-column justify-content-center align-items-center py-3 my-4 border-top">
+        <div class="d-flex flex-column align-items-center text-center">
+          <span class="text-muted">22212 인천광역시 미추홀구 인하로 100 인하대학교 <br/>microgravitykorea@gmail.com <br/>
+            ©Copyright 2019. Korean Microgravity Society All Rights Reserved.
+          </span>
+        </div>
+    </footer>
+</div>
+
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+></script>
+
+</body>
+</html>
